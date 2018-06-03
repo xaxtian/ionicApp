@@ -52,13 +52,20 @@ export class MapService {
     //Parte geolocation
 
     initTrack(){
-      this.trackId = this.geolocation.watchPosition();
+      this.trackId = this.geolocation.watchPosition(); 
+      let options = {
+          enableHighAccuracy: true,
+          timeout: 10000,
+          maximumAge: 0
+        };
+        this.trackId.options=options;
       this.trackId.subscribe((data) => {
         let point={};
         point['latitud']=data.coords.latitude;
         point['longitud']=data.coords.longitude;
         this.addPoint(point);
         try{
+            this.gMaps._vaciarMarkers();
             this.gMaps.pintar_recorrido(this.nuevaLista.items);
             this.gMaps.pintar_kontrol(this.gMaps.endPnt,"Tu");
         }catch(ex){

@@ -5,6 +5,7 @@ export class GMaps{
         map:any;
         startPnt:any;
         endPnt:any;
+        markers:any[];
         imageKontrol:object = {
             url: '/assets/imgs/Map-Marker-Ball.png',
             // This marker is 20 pixels wide by 32 pixels high.
@@ -27,6 +28,7 @@ export class GMaps{
             console.log(startPoint)
             console.log(element)
             this.startPnt = startPoint;
+            this.markers=[];
             this.map = new google.maps.Map(element, {
             zoom: 14,
             center: {lat: startPoint["latitud"], lng: startPoint["longitud"]},
@@ -68,7 +70,7 @@ export class GMaps{
         	this._pintarMarker(meta,texto,this.map,this.imageMeta);
         }
         _pintarMarker(coord,info,map,_imageKontrol){
-            var market=null;
+            let market=null;
             market = new google.maps.Marker({
                 position: {lat: coord["latitud"], lng: coord["longitud"]},
                 map: map,
@@ -80,6 +82,13 @@ export class GMaps{
                 market.addListener('click',function(event){
                 infowindow.open(map, market);
             });
+            this.markers.push(market)
+        }
+        _vaciarMarkers(){
+            for(let i = 0; i<this.markers.length;i++){
+                if(i>0)this.markers[i].setMap(null);
+            }
+                  this.markers.length = 0;
         }
         
 }
