@@ -66,7 +66,7 @@ export class MapService {
         this.addPoint(point);
         try{
             this.gMaps.pintar_recorrido(this.nuevaLista.items);
-            this.gMaps._actualizarPersona(point);
+            this.gMaps._actualizarPersona(this.ultimoPunto);
         }catch(ex){
             console.log("Errores al añadir puntos")
         }

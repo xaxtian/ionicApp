@@ -92,7 +92,7 @@ export class GMaps{
             }
                 this.markers.length = 0;
         }
-        _pintarPersona(punto?,texto="Salida"){
+        _pintarPersona(punto?,texto="Tu"){
         	this.persona=this._pintarMarker(this.startPnt,texto,this.map,this.imageMeta);
         }
         _actualizarPersona(position){
