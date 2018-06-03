@@ -93,8 +93,7 @@ export class GMaps{
                 this.markers.length = 0;
         }
         _pintarPersona(punto?,texto="Salida"){
-            punto = typeof(punto)=="undefined"?this.startPnt:punto;
-        	this.persona=this._pintarMarker(punto,texto,this.map,this.imageMeta);
+        	this.persona=this._pintarMarker(this.startPnt,texto,this.map,this.imageMeta);
         }
         _actualizarPersona(position){
             var latlng = new google.maps.LatLng(position["latitud"],position["longitud"]);
