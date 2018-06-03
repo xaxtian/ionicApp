@@ -88,7 +88,8 @@ export class GMaps{
             for(let i = 0; i<this.markers.length;i++){
                 if(i>0)this.markers[i].setMap(null);
             }
-                  this.markers.length = 0;
+                this.markers = [];
+                this.markers.length = 0;
         }
         
 }
