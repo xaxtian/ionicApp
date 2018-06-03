@@ -1,9 +1,10 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>Lista de pendientes</ion-title>
+    <ion-title>Home</ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-  <h1>Lista de pendientes</h1>
+ <div *ngIf="!error" id="map"></div>
+ <p *ngIf="error">{{this.error}}</p>
 </ion-content>
