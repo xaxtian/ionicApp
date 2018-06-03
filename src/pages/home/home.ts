@@ -36,6 +36,7 @@ ngOnInit(): void {
 pintar_punto(){
   this.mapService.initMap(document.getElementById('map'),this.punto)
   this.mapService.gMaps.pintar_salida();
+  this.gMaps._pintarPersona();
   this.mapService.initTrack();
 }
 }

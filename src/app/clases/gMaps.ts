@@ -6,6 +6,7 @@ export class GMaps{
         startPnt:any;
         endPnt:any;
         markers:any[];
+        persona:any;
         imageKontrol:object = {
             url: '/assets/imgs/Map-Marker-Ball.png',
             // This marker is 20 pixels wide by 32 pixels high.
@@ -29,6 +30,7 @@ export class GMaps{
             console.log(element)
             this.startPnt = startPoint;
             this.markers=[];
+            this.persona={};
             this.map = new google.maps.Map(element, {
             zoom: 14,
             center: {lat: startPoint["latitud"], lng: startPoint["longitud"]},
@@ -53,7 +55,7 @@ export class GMaps{
         }
 
         pintar_kontrol(kontrol,texto){
-        	this._pintarMarker(kontrol,texto,this.map,this.imageKontrol);
+        	this.markers.push(this._pintarMarker(kontrol,texto,this.map,this.imageKontrol));
         }
         pintar_kontroles(kontroles,textos = []){
         	for(var i = 0;i<kontroles.length;i++){
@@ -62,12 +64,12 @@ export class GMaps{
         }
         pintar_salida(salida?,texto="Salida"){
             salida = typeof(salida)=="undefined"?this.startPnt:salida;
-        	this._pintarMarker(salida,texto,this.map,this.imageMeta);
+        	this.markers.push(this._pintarMarker(salida,texto,this.map,this.imageMeta));
         }
         pintar_meta(meta,texto){
             meta = typeof(meta)=="undefined"?this.endPnt:meta;
             texto = typeof(texto)=="undefined"?"Meta":texto;
-        	this._pintarMarker(meta,texto,this.map,this.imageMeta);
+        	this.markers.push(this._pintarMarker(meta,texto,this.map,this.imageMeta));
         }
         _pintarMarker(coord,info,map,_imageKontrol){
             let market=null;
@@ -82,13 +84,21 @@ export class GMaps{
                 market.addListener('click',function(event){
                 infowindow.open(map, market);
             });
-            this.markers.push(market)
+            return;
         }
         _vaciarMarkers(){
             for(let i = 0; i<this.markers.length;i++){
                 this.markers[i].setMap(null);
             }
                 this.markers.length = 0;
+        }
+        _pintarPersona(punto?,texto="Salida"){
+            punto = typeof(punto)=="undefined"?this.startPnt:punto;
+        	this.persona=this._pintarMarker(punto,texto,this.map,this.imageMeta);
+        }
+        _actualizarPersona(position){
+            var latlng = new google.maps.LatLng(position["latitud"],position["longitud"]);
+            this.persona.setPosition(latlng);
         }
         
 }
