@@ -84,7 +84,7 @@ export class GMaps{
                 market.addListener('click',function(event){
                 infowindow.open(map, market);
             });
-            return;
+            return market;
         }
         _vaciarMarkers(){
             for(let i = 0; i<this.markers.length;i++){
