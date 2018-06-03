@@ -4,7 +4,7 @@ import { ListaItem } from './lista-item';
 export class Lista{
     nombre:string;
     terminada:boolean;
-    items:any[];
+    items:ListaItem[];
     
 
     constructor(nombre:string){

@@ -66,6 +66,7 @@ export class MapService {
         this.addPoint(point);
         try{
             this.gMaps._vaciarMarkers();
+            this.gMaps.pintar_salida();
             this.gMaps.pintar_recorrido(this.nuevaLista.items);
             this.gMaps.pintar_kontrol(this.gMaps.endPnt,"Tu");
         }catch(ex){

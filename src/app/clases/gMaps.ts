@@ -86,9 +86,8 @@ export class GMaps{
         }
         _vaciarMarkers(){
             for(let i = 0; i<this.markers.length;i++){
-                if(i>0)this.markers[i].setMap(null);
+                this.markers[i].setMap(null);
             }
-                this.markers = [];
                 this.markers.length = 0;
         }
         
