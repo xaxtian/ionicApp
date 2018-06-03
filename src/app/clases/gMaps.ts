@@ -14,7 +14,7 @@ export class GMaps{
             // The anchor for this image is the base of the flagpole at (0, 32).
             anchor: new google.maps.Point(24, 48)
         };
-        imageMeta:object = {
+        imageMeta:object ={
             url: '/assets/imgs/Map-Marker-Flag.png',
             // This marker is 20 pixels wide by 32 pixels high.
             size: new google.maps.Size(48, 48),

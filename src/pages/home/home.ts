@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { NavController } from 'ionic-angular';
-import { Geolocation } from '@ionic-native/geolocation';
 import { GMaps } from '../../app/clases/gMaps';
 import { MapService } from '../../app/services/trackService';
 //import { ListaItem } from '../../app/clases/lista-item';
@@ -19,7 +18,6 @@ export class HomePage implements OnInit {
 
   constructor(
     public navCtrl: NavController,
-    private geolocation: Geolocation,
     private mapService: MapService) {
 };
 ngOnInit(): void { 
@@ -36,10 +34,8 @@ ngOnInit(): void {
         });
 }
 pintar_punto(){
-  this.gMaps = new GMaps(document.getElementById('map'),this.punto);
-  this.gMaps.pintar_kontroles([this.punto]);
-  this.gMaps.pintar_recorrido([this.punto]);
-  this.gMaps.pintar_salida();
+  this.mapService.initMap(document.getElementById('map'),this.punto)
+  this.mapService.gMaps.pintar_salida();
   this.mapService.initTrack();
 }
 }

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Lista } from '../clases/listas';
 import { ListaItem } from '../clases/lista-item';
 import { Geolocation } from '@ionic-native/geolocation';
+import { GMaps } from '../../app/clases/gMaps';
 
 
 @Injectable()
@@ -11,10 +12,12 @@ export class MapService {
     nuevaLista:Lista;
     ultimoPunto:any;
     trackId:any;
+    gMaps:GMaps;
     constructor(
         private geolocation: Geolocation
     ){
         this.cargarData();
+        this.nuevaLista = new Lista("track");
     }
     //Gestion de datos de recorrido
     cargarData(){
@@ -24,7 +27,7 @@ export class MapService {
         }
     }
     addPoint(_punto:any){
-        if(!this.mustSave(_punto))return;
+        //if(!this.mustSave(_punto))return;
         this.nuevaLista.items.push(_punto);
         this.ultimoPunto=_punto;
 
@@ -55,6 +58,11 @@ export class MapService {
         point['latitud']=data.coords.latitude;
         point['longitud']=data.coords.longitude;
         this.addPoint(point);
+        try{
+            this.gMaps.pintar_recorrido(this.nuevaLista.items);
+        }catch(ex){
+            console.log("Errores al añadir puntos")
+        }
       });
     }
     finishTrack(){
@@ -69,12 +77,17 @@ export class MapService {
         point['latitud']=resp.coords.latitude;
         point['longitud']=resp.coords.longitude;
         this.ultimoPunto = point;
+        this.addPoint(point);
         resolve(point);
         }).catch((error) => {
         reject();
         });
       });
     return promise;
+}
+    //Parte google maps
+    initMap(element:any,punto:any){
+        this.gMaps = new GMaps(element,punto);
     }
 
     //Funciones de logica interna
