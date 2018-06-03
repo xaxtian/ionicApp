@@ -26,6 +26,7 @@ export class GMaps{
         constructor(public element:any,public startPoint:any){
             console.log(startPoint)
             console.log(element)
+            this.startPnt = startPoint;
             this.map = new google.maps.Map(element, {
             zoom: 14,
             center: {lat: startPoint["latitud"], lng: startPoint["longitud"]},

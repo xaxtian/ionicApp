@@ -7,4 +7,8 @@
 <ion-content padding>
  <div *ngIf="!error" id="map"></div>
  <p *ngIf="error">{{this.error}}</p>
+ <div *ngIf="mapService.ultimoPunto">
+  <p >Latitud: {{mapService.ultimoPunto.latitud}}</p>
+  <p>Longitud: {{mapService.ultimoPunto.longitud}}</p>
+ </div>
 </ion-content>
